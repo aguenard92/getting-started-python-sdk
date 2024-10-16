@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Dashboard</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin: 10px;
+            padding: 10px;
+            background-color: white;
+            border-radius: 5px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Vehicle Dashboard</h1>
+    
+    <!-- Check Battery Level -->
+    <button id="check-battery">Check Battery Level</button>
+    <div id="battery-result" class="result"></div>
+    
+    <!-- Check Location -->
+    <button id="check-location">Check Location</button>
+    <div id="location-result" class="result"></div>
+    
+    <!-- Check Attributes -->
+    <button id="check-attributes">Check Attributes</button>
+    <div id="attributes-result" class="result"></div>
+    
+    <!-- Check Energy Added -->
+    <button id="check-energy">Check Energy Added</button>
+    <div id="energy-result" class="result"></div>
+
+    <!-- Start Battery Sampling -->
+    <button id="start-sampling">Start Battery Sampling</button>
+    <div id="battery-level-result" class="result"></div>
+
+    <script>
+        $(document).ready(function () {
+            // Check Battery Level
+            $("#check-battery").click(function () {
+                $.get("/check_battery", function (data) {
+                    $("#battery-result").html("Battery Level: " + data.percent_remaining + "%, Range: " + data.range + " km");
+                });
+            });
+
+            // Check Location
+            $("#check-location").click(function () {
+                $.get("/check_location", function (data) {
+                    $("#location-result").html("Location: " + data.location);
+                });
+            });
+
+            // Check Attributes
+            $("#check-attributes").click(function () {
+                $.get("/check_attributes", function (data) {
+                    $("#attributes-result").html("Make: " + data.make + ", Model: " + data.model + ", Year: " + data.year);
+                });
+            });
+
+            // Check Energy Added
+            $("#check-energy").click(function () {
+                $.get("/check_energy", function (data) {
+                    $("#energy-result").html("Energy Added: " + data.energy_added + " kWh");
+                });
+            });
+
+            // Start Battery Sampling
+            $("#start-sampling").click(function () {
+                $.get("/start_sampling", function (data) {
+                    $("#battery-level-result").html(data.message);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -53,6 +53,8 @@ def exchange_code():
     # in a production app you'll want to store this in some kind of
     # persistent storage
     access = client.exchange_code(code)
+
+    
     return redirect("/vehicle_dashboard")
 
 
@@ -92,7 +94,7 @@ def check_battery():
     vehicle_id = smartcar.get_vehicles(access.access_token).vehicles[0]
     vehicle = smartcar.Vehicle(vehicle_id, access.access_token)
 
-    battery =  vehicle.battery()  # Request the charge status
+    battery = vehicle.battery()  # Request the charge status
     
     return jsonify({"Percentage": battery.percentRemaining, "range": battery.range})
 

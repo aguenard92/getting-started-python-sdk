@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vehicle Dashboard</title>
+    <title>Vehicule Dashboard</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -26,7 +26,7 @@
         $(document).ready(function () {
             $("#check-battery").click(function () {
                 $.get("/check_battery", function (data) {
-                    $("#battery-result").html("Battery Level: " + data.battery);
+                    $("#battery-result").html("Battery Level: " + data.percent_remaining + ", Range:" + data.range);
                 });
             });
 
