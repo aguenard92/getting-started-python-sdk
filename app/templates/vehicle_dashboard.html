@@ -1,0 +1,53 @@
+<!-- Noblet_Groupe.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Dashboard</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Vehicle Dashboard</h1>
+    
+    <button id="check-battery">Check Battery Level</button>
+    <div id="battery-result"></div>
+    
+    <button id="check-location">Check Location</button>
+    <div id="location-result"></div>
+    
+    <button id="check-attributes">Check Attributes</button>
+    <div id="attributes-result"></div>
+    
+    <button id="check-energy">Check Energy Added</button>
+    <div id="energy-result"></div>
+
+    <script>
+        $(document).ready(function () {
+            $("#check-battery").click(function () {
+                $.get("/check_battery", function (data) {
+                    $("#battery-result").html("Battery Level: " + data.battery);
+                });
+            });
+
+            $("#check-location").click(function () {
+                $.get("/check_location", function (data) {
+                    $("#location-result").html("Location: " + data.location);
+                });
+            });
+
+            $("#check-attributes").click(function () {
+                $.get("/check_attributes", function (data) {
+                    $("#attributes-result").html("Make: " + data.make + ", Model: " + data.model + ", Year: " + data.year);
+                });
+            });
+
+            $("#check-energy").click(function () {
+                $.get("/check_energy", function (data) {
+                    $("#energy-result").html("Energy Added: " + data.energy_added);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
