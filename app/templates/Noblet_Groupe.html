@@ -7,14 +7,30 @@
     <style>
         body {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             flex-direction: column;
+            align-items: center;
             font-family: Arial, sans-serif;
+            height: 100vh;
+            margin: 0;
         }
         h1 {
+            font-size: 36px;
             margin-bottom: 20px;
+        }
+        .container {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            flex-grow: 1;
+            padding: 20px;
+        }
+        .column {
+            flex: 1;
+            margin: 0 10px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
         }
         .button {
             padding: 10px 20px;
@@ -25,14 +41,32 @@
             cursor: pointer;
             text-decoration: none;
             font-size: 16px;
+            margin-top: 10px;
         }
         .button:hover {
             background-color: #0056b3;
         }
+        input {
+            padding: 10px;
+            width: 80%;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
-    <h1>Welcome to Noblet Groupe</h1>
-    <a href="{{ url_for('login') }}" class="button">Connecter des vehicules</a>
+    <h1>Groupe Noblet</h1>
+    <div class="container">
+        <div class="column">
+            <h2>Connecter un véhicule</h2>
+            <a href="{{ url_for('login') }}" class="button">Connecter</a>
+        </div>
+        <div class="column">
+            <h2>Connecter un compteur Enedis</h2>
+            <input type="text" placeholder="Enter compteur number" />
+            <button class="button">Validate</button>
+        </div>
+    </div>
 </body>
 </html>
