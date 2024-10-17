@@ -56,35 +56,37 @@
         #result {
             margin-top: 20px;
         }
-        #energy-image {
+        #energy-image,
+        #load-curve-image {
             display: none; /* Hide initially */
+            margin: 20px auto; /* Centers the image horizontally */
             width: 60%; /* Set the width to 60% of the original size */
-            margin-top: 20px;
         }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <h1>Vehicle Dashboard</h1>
+    <h1>Vehicule Dashboard</h1>
     <div class="container">
         <div class="column">
             <h2>Check Vehicle Status</h2>
-            <button id="check-battery" class="button">Check Battery Level</button>
+            <button id="check-battery" class="button">Verifier le niveau de batterie</button>
             <div id="battery-result"></div>
-            <button id="check-location" class="button">Check Location</button>
+            <button id="check-location" class="button">Verifier la localisation</button>
             <div id="location-result"></div>
-            <button id="check-attributes" class="button">Check Attributes</button>
+            <button id="check-attributes" class="button">Verifier les attributs</button>
             <div id="attributes-result"></div>
-            <button id="check-energy" class="button">Check Energy Added</button>
+            <button id="check-energy" class="button">Verifier l'energie </button>
             <div id="energy-result"></div>
             <img id="energy-image" src="" alt="Energy Graph">
-            <button id="start-sampling" class="button">Start Battery Sampling</button>
+            <button id="start-sampling" class="button">Commencer la recuperation de donnees</button>
             <div id="battery-level-result"></div>
         </div>
         <div class="column">
             <h2>Connecter un compteur Enedis</h2>
             <input type="text" placeholder="Enter compteur number" />
-            <button class="button">Validate</button>
+            <button id="validate-button" class="button">Validate</button>
+            <img id="load-curve-image" src="" alt="Load Graph">
         </div>
     </div>
 
@@ -116,6 +118,13 @@
                 }).fail(function() {
                     console.log("GET request failed");
                 });
+            });
+
+            // Add click event for the Validate button
+            $("#validate-button").click(function () {
+                console.log("Validate button clicked");
+                // Show the load curve image
+                $("#load-curve-image").attr("src", "/static/load_curve.png").show();
             });
 
             $("#start-sampling").click(function () {
