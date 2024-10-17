@@ -8,7 +8,7 @@ import requests
 
 class SmartcarApp:
     def __init__(self, name):
-        self.app = Flask(name)
+        self.app = Flask(name, static_folder='static')
         CORS(self.app)
         self.client = smartcar.AuthClient(mode="simulated")
         self.access_token = None
@@ -208,8 +208,8 @@ class SmartcarApp:
         @self.app.route("/check_energy", methods=["GET"])
         def check_energy():
             vehicle = self.get_vehicle()
-            charge =  vehicle.request("GET", "Tesla/charge")
-            return jsonify({"Energy Added": charge.energy_added})
+            #charge =  vehicle.request("GET", "Tesla/charge")
+            return jsonify({"Energy Added": 'Unkown'})
         
         @self.app.route("/start_sampling", methods=["GET"])
         def start_sampling():

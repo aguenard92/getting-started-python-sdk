@@ -56,6 +56,11 @@
         #result {
             margin-top: 20px;
         }
+        #energy-image {
+            display: none; /* Hide initially */
+            width: 60%; /* Set the width to 60% of the original size */
+            margin-top: 20px;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -72,6 +77,7 @@
             <div id="attributes-result"></div>
             <button id="check-energy" class="button">Check Energy Added</button>
             <div id="energy-result"></div>
+            <img id="energy-image" src="" alt="Energy Graph">
             <button id="start-sampling" class="button">Start Battery Sampling</button>
             <div id="battery-level-result"></div>
         </div>
@@ -103,8 +109,12 @@
             });
 
             $("#check-energy").click(function () {
+                console.log("Button clicked");
                 $.get("/check_energy", function (data) {
-                    $("#energy-result").html("Energy Added: " + data.energy_added);
+                    console.log("GET request successful");
+                    $("#energy-image").attr("src", "/static/SOC_curve.png").show();
+                }).fail(function() {
+                    console.log("GET request failed");
                 });
             });
 
